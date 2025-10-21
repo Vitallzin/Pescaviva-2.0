@@ -9,10 +9,7 @@ export default defineConfig({
   server: {
     port: 5173
   },
-  // ==========================================
-  // ADIÇÃO CRUCIAL PARA O DEPLOY NO VERCEL
-  // ==========================================
   build: {
     outDir: '../dist' 
-  }
+  },
 })
