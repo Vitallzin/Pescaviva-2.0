@@ -1,0 +1,1424 @@
+/* ==================================================
+   src/index.css - OTIMIZADO E CONSOLIDADO
+   ================================================== */
+#root > div { /* Assumindo que seu App.tsx retorna um fragmento ou um contêiner */
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+:root{
+  --pv-header-height: 88px;
+  --pv-primary: #138f6b; /* Seu verde principal */
+  --pv-dark: #0b6b48;
+  --pv-contrast: #05386b; /* Seu azul marinho (ótimo para footer) */
+  --bg: #f6f9fb;
+}
+main {
+    flex-grow: 1; /* Isto é o que força o conteúdo a preencher o espaço! */
+    width: 100%;
+    max-width: 1200px; /* Mantém a largura centralizada do seu container */
+    margin: 24px auto; /* Centraliza o <main> */
+    padding: 0 18px; /* Padding padrão */
+    box-sizing: border-box;
+}
+
+/* ---------------------
+   Base & Reset
+   --------------------- */
+*{ box-sizing: border-box }
+html, body, #root{ height: 100%; margin: 0; padding: 0; }
+body{
+  margin:0; padding:0; font-family: Arial, Helvetica, sans-serif; background:var(--bg); color:#222;
+  font-size: 16px;
+}
+a{ color:inherit; text-decoration:none }
+button{ cursor:pointer }
+h1, h2, h3, h4, p, ul, ol, li { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img { max-width: 100%; height: auto; display: block; }
+input[type="text"], input[type="number"], input[type="file"], textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+/* ---------------------
+   Layout Helpers
+   --------------------- */
+.container-main{ max-width:1200px; margin:24px auto; padding:12px 18px }
+.botoes-main{ text-align:center; margin-top:10px }
+.botoes-main button{ margin:6px }
+
+/* ---------------------
+    Header
+    --------------------- */
+.pv-header{
+    height: var(--pv-header-height);
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.pv-header-inner{
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.pv-left{ display:flex; align-items:center; gap: 20px; }
+.pv-logo{ height:40px; cursor:pointer }
+.pv-search{ position:relative; width: 350px; }
+.pv-search input{ width:100%; padding:10px 40px 10px 15px; border:1px solid #ddd; border-radius: 20px; background:#f5f5f5; transition: border-color .2s; }
+.pv-search input:focus{ border-color: var(--pv-primary); outline:none; background: #fff; }
+.pv-search-button{
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 5px;
+}
+.pv-search-button img{ width: 20px; height: 20px; }
+.pv-actions{ display:flex; align-items:center; gap: 10px; }
+.pv-btn{
+    display: flex; align-items:center; gap: 6px;
+    background: var(--pv-primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 15px;
+    font-weight: 500;
+    transition: background .2s, opacity .2s;
+}
+.pv-btn:hover{ background: var(--pv-dark); }
+.pv-btn-ghost{ background: none; color: var(--pv-primary); border: 1px solid var(--pv-primary); }
+.pv-btn-ghost:hover{ background: var(--pv-primary); color: #fff; }
+.pv-btn img{ width: 20px; height: 20px; }
+
+/* ---------------------
+   Carousel / Cards (APRIMORADO)
+   --------------------- */
+.container-wrapper{ position:relative; display:flex; align-items:center; padding-bottom:22px }
+
+/* CENTRALIZAÇÃO VISUAL: Ajustado padding lateral para dar respiro e rolagem mais natural */
+.container{
+    display:flex;
+    gap:20px; /* Aumenta o espaçamento entre cards */
+    overflow-x:auto;
+    padding:8px 48px; /* Mantém o padding para botões de controle não cobrirem o primeiro/último card */
+    scrollbar-width:none;
+    -ms-overflow-style:none
+}
+.container::-webkit-scrollbar{ display:none }
+.container{ scroll-behavior: smooth }
+
+.card{
+    background: #fff;
+    border-radius: 12px; /* Aumenta o arredondamento */
+    box-shadow: 0 8px 24px rgba(3,59,115,0.08); /* Sombra mais suave */
+    overflow: hidden;
+    flex: 0 0 220px; /* Aumenta para 220px (de 200px) para melhor design e centralização visual */
+    max-width: 220px;
+    display: flex;
+    flex-direction: column;
+    transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
+    border: 1px solid transparent; /* Borda transparente para o hover */
+}
+/* Estilo de card clicável (cursor) e efeito hover aprimorado */
+.card-clicavel{ cursor:pointer }
+.card-clicavel:hover{ transform: translateY(-8px); box-shadow: 0 16px 40px rgba(3,59,115,0.12); border: 1px solid var(--pv-primary); }
+.card:not(.card-clicavel):hover{ transform: translateY(-6px); box-shadow: 0 14px 34px rgba(3,59,115,0.08); }
+
+.card-media{ position: relative; background: #f6f9fb }
+.card-media img, .card-img{ width:100%; height:160px; /* Aumenta a altura */ object-fit:cover; display:block }
+
+.card-content{
+    padding:12px; /* Aumenta o padding interno */
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    flex-grow: 1; /* Garante que o conteúdo empurre o botão para baixo */
+}
+.preco{ display: none; } /* Preço removido do corpo e movido para o botão */
+.titulo{ margin:0; font-weight:700; font-size:1.1rem; color:var(--pv-contrast) }
+.descricao{ color:#666; font-size:0.9rem; height:40px; overflow:hidden; text-overflow:ellipsis; line-height: 1.3 }
+.card-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:auto;
+    font-size:0.85rem;
+    color:#667;
+    gap:8px;
+    padding-top: 10px;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* Botão Comprar (aprimorado com preço) */
+.botao_comprar{
+    background: var(--pv-primary);
+    color:#fff;
+    border:0;
+    border-radius:0 0 12px 12px;
+    padding:12px 10px;
+    font-weight:700;
+    cursor:pointer;
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin-top: auto;
+    transition: background .2s, box-shadow .2s;
+}
+.preco-no-botao {
+    font-weight: 900;
+    font-size: 1.15rem; /* Destaca o preço */
+}
+.botao_comprar:hover{
+    background: var(--pv-dark);
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+}
+.botao_comprar:disabled{
+    opacity:0.8;
+    cursor:not-allowed;
+    background: #ccc;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Botões de Navegação (Prev/Next) */
+.proximo-produto, .voltar-produto{
+    background: var(--pv-contrast);
+    color:#fff;
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:0;
+    position:relative;
+    z-index:10;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transform: translateY(0); pointer-events:none;
+    transition: opacity .2s ease, transform .2s ease, background .2s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-size: 1.2rem;
+}
+.proximo-produto.visible, .voltar-produto.visible{
+    opacity:0.95; pointer-events:auto; transform: translateY(0);
+}
+.proximo-produto:hover, .voltar-produto:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+    background: #085a8c;
+}
+.proximo-produto{ margin-left:12px }
+.voltar-produto{ margin-right:12px }
+
+/* ---------------------
+   Botões de Navegação (Voltar/Gerais)
+   --------------------- */
+
+.btn-voltar-detalhe {
+    background: #eef1f3; /* Cor clara */
+    color: #003b73;
+    border: 1px solid #c9d0d6;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.2s;
+    /* Estilos para centralizar/limitar a largura se estiver solto na tela */
+    max-width: 400px;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+.btn-voltar-detalhe:hover {
+    background: #dce0e5;
+    border-color: #aeb5be;
+}
+
+
+/* ---------------------
+    Banner
+    --------------------- */
+.banner{
+    max-width: 1200px;
+    margin: 24px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    height: 250px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.banner img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+    transition: opacity 1s;
+}
+.banner img[style*="block"]{ display: block; }
+
+
+/* ---------------------
+   Página Publicar
+   --------------------- */
+#main-publicar{
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 12px 18px;
+    min-height: calc(100vh - var(--pv-header-height) - 50px);
+}
+.publicar-container{
+    max-width: 400px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 24px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+.publicar-container h2 {
+    text-align: center;
+    color: var(--pv-contrast);
+    margin-bottom: 20px;
+}
+.form-publicar{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.form-publicar label{
+    font-weight: 600;
+    color: var(--pv-contrast);
+    margin-top: 5px;
+}
+.form-publicar input, .form-publicar textarea, .form-publicar input[type="file"]{
+    width: 100%;
+}
+.form-publicar textarea{
+    resize: vertical;
+    min-height: 60px;
+    max-height: 180px;
+}
+#faixa-preco{
+    width: 100%;
+    margin-bottom: 12px;
+    background: #eaf3fa;
+    border-radius: 8px;
+    padding: 12px 10px;
+    box-sizing: border-box;
+    text-align: center;
+    border: 1px solid #cce0f0;
+}
+#faixa-preco h4{
+    margin-bottom: 8px;
+    color: var(--pv-contrast);
+}
+#faixa-preco label{
+    margin-bottom: 4px;
+    font-weight: 500;
+    color: #003b73;
+}
+.form-publicar button[type="submit"]{
+    background: var(--pv-primary);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-top: 15px;
+    transition: background .2s;
+}
+.form-publicar button[type="submit"]:hover{ background: var(--pv-dark); }
+.file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: #fff;
+}
+.file-upload-wrapper input[type="file"] {
+    border: none;
+    padding: 0;
+}
+
+
+/* ---------------------
+   Página Detalhe
+   --------------------- */
+#main-detalhe {
+    padding-top: 24px;
+    min-height: calc(100vh - var(--pv-header-height) - 50px);
+}
+.produto-detalhe-container{
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    display: grid;
+    grid-template-areas:
+        "voltar voltar"
+        "imagem info"
+        "detalhe detalhe"
+        "vendedor vendedor";
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+    position: relative;
+}
+.btn-voltar-detalhe{
+    grid-area: voltar;
+    justify-self: start;
+    background: none;
+    border: 1px solid var(--pv-primary);
+    color: var(--pv-primary);
+    padding: 8px 15px;
+    border-radius: 6px;
+    transition: all .2s;
+}
+.btn-voltar-detalhe:hover{ background: var(--pv-primary); color: #fff; }
+.imagem-detalhe-produto{
+    grid-area: imagem;
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+.info-detalhe-produto{
+    grid-area: info;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.titulo-detalhe-produto{ font-size: 2rem; color: var(--pv-contrast); }
+.preco-detalhe-produto{ font-size: 2.5rem; color: var(--pv-primary); font-weight: 700; }
+.btn-adicionar-carrinho, .btn-comprar-detalhe{
+    padding: 15px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: background .2s;
+}
+.btn-adicionar-carrinho{
+    background: #eee;
+    color: var(--pv-contrast);
+    border: 2px solid #ddd;
+}
+.btn-adicionar-carrinho:hover{ background: #ddd; }
+.btn-comprar-detalhe{
+    background: var(--pv-primary);
+    color: #fff;
+}
+.btn-comprar-detalhe:hover{ background: var(--pv-dark); }
+.box-produto-detalhado{
+    grid-area: detalhe;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 20px;
+}
+.titulo-box-detalhe{
+    color: var(--pv-contrast);
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--pv-primary);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+.lista-detalhe-produto li{
+    margin-bottom: 10px;
+    line-height: 1.4;
+    color: #444;
+}
+
+/* Vendedor/Chat */
+.vendedor-detalhe-box{
+    grid-area: vendedor;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: #f6f9fb;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+.vendedor-detalhe-info{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.vendedor-detalhe-info img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--pv-primary);
+    object-fit: cover;
+}
+.vendedor-detalhe-info span{ font-weight: 600; color: var(--pv-contrast); }
+.btn-chat-vendedor{
+    background: var(--pv-contrast);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
+}
+.btn-chat-vendedor:hover{ background: #042a54; }
+
+/* ---------------------
+   Página Carrinho
+   --------------------- */
+#main-carrinho {
+    max-width: 800px;
+    margin: 24px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+#main-carrinho h2 {
+    text-align: center;
+    color: var(--pv-contrast);
+    margin-bottom: 20px;
+}
+#lista-carrinho {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+.item-carrinho img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+.item-carrinho span {
+    flex-grow: 1;
+    font-size: 1.1rem;
+    color: #444;
+}
+.item-carrinho input[type="number"] {
+    width: 60px;
+    text-align: center;
+    padding: 5px;
+}
+.btn-remover {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+.carrinho-total {
+    text-align: right;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid var(--pv-primary);
+}
+.carrinho-total span { color: var(--pv-primary); }
+.btn-finalizar-compra {
+    display: block;
+    width: 100%;
+    background: var(--pv-primary);
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 15px;
+}
+.carrinho-total button {
+    background: var(--pv-primary); /* Verde primário */
+    color: white;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.carrinho-total button:hover {
+    background: var(--pv-dark);
+}
+
+/* ---------------------
+   Página Notificação
+   --------------------- */
+#main-notificacao {
+    max-width: 800px;
+    margin: 24px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    min-height: calc(100vh - var(--pv-header-height) - 50px);
+}
+#main-notificacao h2 { text-align: center; color: var(--pv-contrast); margin-bottom: 20px; }
+.notificacao-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 20px;
+}
+#lista-notificacoes { border-right: 1px solid #eee; padding-right: 15px; }
+.notificacao-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: background .2s;
+}
+.notificacao-item:hover { background: #f0f0f0; }
+.notificacao-selecionada { background: #eaf3fa; border-left: 4px solid var(--pv-primary); padding-left: 6px; }
+.icone-notificacao { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
+.notificacao-detalhe {
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 6px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.detalhe-placeholder { color: #888; text-align: center; margin-top: 50px; }
+
+
+/* ---------------------
+   Página Chat
+   --------------------- */
+#main-chat {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    min-height: calc(100vh - var(--pv-header-height) - 50px);
+}
+#main-chat h2 { color: var(--pv-contrast); margin-bottom: 20px; }
+.chat-container {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 20px;
+    height: 600px; /* Altura fixa para o chat */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.lista-contatos {
+    padding: 10px 0;
+    background: #f9f9f9;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+}
+.contato {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background .2s;
+}
+.contato:hover { background: #f0f0f0; }
+.contato.ativo { background: #eaf3fa; border-left: 4px solid var(--pv-primary); padding-left: 11px; }
+.contato img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.chat-area {
+    display: flex;
+    flex-direction: column;
+}
+.chat-mensagens {
+    flex-grow: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.mensagem { max-width: 70%; padding: 8px 12px; border-radius: 15px; line-height: 1.4; }
+.mensagem.usuario { background: var(--pv-primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.mensagem.vendedor, .mensagem.cliente { background: #eee; color: #333; align-self: flex-start; border-bottom-left-radius: 4px; }
+.chat-form {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+}
+.chat-form input { flex-grow: 1; border-radius: 20px; margin-right: 10px; padding: 10px 15px; border: 1px solid #ccc; }
+.chat-form button {
+    background: var(--pv-primary);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* ---------------------
+   Footer
+   --------------------- */
+.pv-footer {
+    /* CORREÇÃO AQUI: Usa a variável de contraste para a cor de fundo */
+    background: var(--pv-contrast); 
+    /* O flex-direction: column no pai garante que ele vá para o fim */
+    width: 100%; 
+    margin-top: auto; 
+    color: #ccc;
+    padding: 0 18px;
+    box-sizing: border-box;
+}
+
+/* ==================================================
+   Chat.tsx Styles (Layout WhatsApp Desktop)
+   ================================================== */
+
+/* Contêiner principal para o layout de duas colunas (WhatsApp Web-like) */
+#main-chat .chat-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex; /* Habilita a divisão de colunas */
+    background: #fff; /* Fundo branco para a área de chat */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    height: 70vh; /* Altura fixa para simular um app/desktop */
+    overflow: hidden;
+}
+
+/* Lista de Contatos (Coluna Esquerda) */
+#main-chat .lista-contatos {
+    flex: 0 0 300px; /* Largura fixa para a lista de contatos (aprox. 30%) */
+    border-right: 1px solid #eee;
+    overflow-y: auto;
+    background: #f7f7f7;
+    padding: 0;
+}
+
+.lista-contatos ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lista-contatos .contato {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.lista-contatos .contato:hover,
+.lista-contatos .contato.ativo {
+    background-color: #e9ecef; /* Cor de destaque para o contato ativo */
+}
+
+.lista-contatos .contato img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    margin-right: 15px;
+    object-fit: cover;
+}
+
+/* Área de Conversa (Coluna Direita) */
+#main-chat .chat-area {
+    flex: 1; /* Ocupa o restante do espaço */
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-mensagens {
+    flex: 1; /* Permite que o chat ocupe todo o espaço disponível */
+    padding: 20px;
+    overflow-y: auto; /* Permite rolar apenas a área de mensagens */
+    background: var(--bg); /* Fundo claro para o chat */
+}
+
+/* Estilização das Mensagens */
+.mensagem {
+    margin-bottom: 10px;
+    display: flex;
+}
+.mensagem span {
+    max-width: 80%;
+    padding: 10px 15px;
+    border-radius: 20px;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.mensagem.usuario {
+    justify-content: flex-end; /* Mensagens do usuário à direita */
+}
+
+.mensagem.usuario span {
+    background-color: var(--pv-primary); /* Verde Pescaviva para mensagens do usuário */
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.mensagem.vendedor,
+.mensagem.cliente {
+    justify-content: flex-start; /* Mensagens do contato à esquerda */
+}
+
+.mensagem.vendedor span,
+.mensagem.cliente span {
+    background-color: #e9ecef; /* Cinza claro para mensagens do contato */
+    color: #333;
+    border-bottom-left-radius: 5px;
+}
+
+/* Formulário de Envio (Parte inferior) */
+.chat-form {
+    padding: 15px 20px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    background: #fff;
+}
+
+.chat-form input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+/* Botão de Enviar (Avião de Papel) */
+.chat-form .btn-enviar-chat {
+    background: var(--pv-primary);
+    color: white;
+    border: none;
+    border-radius: 50%; /* Faz o botão ser redondo */
+    width: 40px;
+    height: 40px;
+    font-size: 18px; /* Tamanho do ícone */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+    /* Ajuste para fazer o ícone de seta (➤) parecer um avião de papel */
+    transform: rotate(-45deg) translate(2px, -2px); /* Rotaciona para parecer um avião */
+    padding-left: 2px; /* Pequeno ajuste de alinhamento */
+}
+
+.chat-form .btn-enviar-chat:hover {
+    background: var(--pv-dark);
+}
+/* ==================================================
+   src/index.css - Estilos para Login/Cadastro e Header Logado
+   ================================================== */
+
+/* ---------------------
+   Header (Usuário Logado)
+   --------------------- */
+
+.pv-perfil-logado {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pv-foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--pv-primary);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.pv-foto-perfil:hover {
+    transform: scale(1.05);
+}
+
+.pv-btn-link-sm {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 0.9em;
+    padding: 0;
+    text-decoration: underline;
+}
+
+.pv-btn-login {
+    background: var(--pv-primary);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+.pv-btn-login:hover {
+    background: var(--pv-dark);
+}
+
+
+/* ---------------------
+   Login.tsx
+   --------------------- */
+#main-login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 18px;
+}
+
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.form-login {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.input-group {
+    text-align: left;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-login input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.pv-btn-login {
+    /* Reutiliza o estilo do header */
+    margin-top: 15px;
+}
+
+.toggle-auth {
+    margin-top: 20px;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.pv-btn-link {
+    background: none;
+    border: none;
+    color: var(--pv-primary);
+    font-weight: 600;
+    cursor: pointer;
+    margin-left: 5px;
+    padding: 0;
+}
+/* ==================================================
+   Header (Revisão da Estrutura e Auth)
+   ================================================== */
+   
+/* ... (Seções pv-header, pv-header-inner, pv-left permanecem as mesmas) ... */
+
+/* Estilo para os botões de Entrar/Cadastrar separados */
+.pv-auth-buttons {
+    display: flex;
+    align-items: center; /* Crucial para alinhar verticalmente */
+    gap: 12px; 
+}
+
+/* Botão "Entrar" (Estilo Ghost/Link) */
+.pv-btn-auth-ghost {
+    background: transparent;
+    border: 1px solid transparent; /* Garante que a altura seja igual ao botão primário */
+    color: var(--pv-dark);
+    font-weight: 600;
+    padding: 9px 15px; /* Ajusta o padding para que a altura final seja igual ao primário */
+    border-radius: 6px;
+}
+.pv-btn-auth-ghost:hover {
+    color: var(--pv-primary);
+    border-color: var(--pv-primary); /* Adiciona uma borda sutil no hover */
+}
+
+/* Botão "Cadastrar" (Estilo Primário/Login) */
+.pv-btn-auth-primary {
+    background: var(--pv-primary);
+    border: 1px solid var(--pv-primary); /* Garante que a altura seja igual ao botão ghost */
+    color: white;
+    padding: 9px 15px; /* Ajusta o padding para que a altura final seja igual ao ghost */
+    border-radius: 6px;
+    font-weight: 600;
+}
+.pv-btn-auth-primary:hover {
+    background: var(--pv-dark);
+    border-color: var(--pv-dark);
+}
+/* ==================================================
+   src/index.css - NOVOS ESTILOS PARA MENU DE CONTA
+   ================================================== */
+
+/* ---------------------
+   Header (Ajuste para o menu de conta)
+   --------------------- */
+
+/* O contêiner para a foto de perfil e o menu suspenso */
+.pv-perfil-logado-wrapper {
+    position: relative; /* Essencial para posicionar o dropdown */
+    display: flex;
+    align-items: center;
+}
+
+.pv-foto-perfil {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s;
+}
+
+.pv-foto-perfil.ativo,
+.pv-foto-perfil:hover {
+    border-color: var(--pv-primary); /* Indica que está ativo/clicável */
+}
+
+
+/* ---------------------
+   Menu Conta Dropdown
+   --------------------- */
+.pv-menu-conta-dropdown {
+    position: absolute;
+    top: calc(100% + 10px); /* Posição abaixo do header e com um pequeno espaço */
+    right: 0;
+    width: 280px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    z-index: 100; /* Garante que fique acima de outros elementos */
+    padding: 15px 0;
+}
+
+.pv-menu-conta-header {
+    padding: 0 15px 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.pv-foto-perfil-menu {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 8px;
+    border: 3px solid var(--pv-primary);
+}
+
+.pv-menu-conta-header h4 {
+    margin: 0 0 4px;
+    color: var(--pv-dark);
+}
+
+.pv-menu-conta-header p {
+    margin: 0;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.pv-menu-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    text-align: left;
+    color: #333;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.pv-menu-btn:hover {
+    background-color: var(--bg); /* Cor de fundo suave no hover */
+}
+
+.pv-menu-btn img {
+    width: 18px;
+    height: 18px;
+    margin-right: 12px;
+    opacity: 0.7;
+}
+
+.pv-menu-separador {
+    height: 1px;
+    background: #eee;
+    margin: 8px 0;
+}
+
+/* Estilo especial para o botão de Logout */
+.pv-menu-logout {
+    color: #d9534f; /* Cor vermelha ou de destaque para a ação de sair */
+}
+.pv-menu-logout:hover {
+    background-color: #fcebeb;
+}
+.pv-menu-logout img {
+    filter: invert(30%) sepia(90%) saturate(1000%) hue-rotate(330deg); /* Faz o ícone ser vermelho */
+}
+/* ==================================================
+   src/index.css - Estilos para a Notificação (Toast)
+   ================================================== */
+.pv-toast {
+    position: fixed;
+    top: calc(var(--pv-header-height) + 15px); /* Abaixo do Header */
+    right: 20px;
+    background-color: var(--pv-primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 1000; /* Deve ser alto para aparecer por cima de tudo */
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    animation: fadeInOut 3s forwards; /* Animação simples de fade */
+}
+
+.pv-toast img {
+    filter: brightness(0) invert(1); /* Deixa o ícone do carrinho branco */
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translateY(-20px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-20px); }
+}
+/* ==================================================
+   src/index.css - Estilos para o Contador do Carrinho (Badge)
+   ================================================== */
+
+.pv-carrinho-btn-wrapper {
+    position: relative; /* Necessário para posicionar o badge */
+}
+
+.pv-carrinho-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    /* Estilos do badge */
+    background-color: #d9534f; /* Vermelho para destaque */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    border-radius: 50%;
+    min-width: 18px; /* Tamanho mínimo */
+    height: 18px;
+    padding: 0 4px;
+    line-height: 18px; /* Centraliza o texto verticalmente */
+    text-align: center;
+    transform: translate(25%, -25%); /* Posiciona fora do canto do ícone */
+    box-shadow: 0 0 0 2px var(--pv-contrast); /* Borda para visibilidade */
+}
+
+/* Garante que o ícone do carrinho se alinhe corretamente se o badge estiver presente */
+.pv-carrinho-btn-wrapper img {
+    margin-right: 0;
+}
+/* ==================================================
+   src/index.css - Estilos para a tela do Carrinho
+   ================================================== */
+
+#main-carrinho {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 18px;
+}
+
+#main-carrinho h2 {
+    color: var(--pv-dark);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Botão "Voltar" (Reutiliza o estilo de voltar) */
+#main-carrinho > button {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    transition: background-color 0.2s;
+}
+
+#main-carrinho > button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Lista de Itens */
+#lista-carrinho {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 30px 0;
+}
+
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px dashed #eee;
+    padding: 15px 0;
+}
+
+.item-carrinho:last-child {
+    border-bottom: none;
+}
+
+.item-carrinho img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-right: 15px;
+}
+
+.item-carrinho span {
+    flex-grow: 1;
+    color: #444;
+}
+
+.item-carrinho input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    margin: 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.item-carrinho .btn-remover {
+    background-color: #f7dcdc; /* Fundo suave de alerta */
+    color: #a94442; /* Cor de texto de alerta */
+    border: 1px solid #ebccd1;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    font-size: 0.85em;
+}
+
+.item-carrinho .btn-remover:hover {
+    background-color: #f5c4c4;
+}
+
+/* Resumo do Pedido */
+.resumo-carrinho {
+    max-width: 400px;
+    margin-left: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.resumo-carrinho h3 {
+    margin-top: 0;
+    color: var(--pv-primary);
+    border-bottom: 1px solid var(--pv-primary);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.resumo-carrinho p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.resumo-carrinho .carrinho-total {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--pv-dark);
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+    margin-top: 15px;
+}
+
+/* Botão de Checkout (Finalizar Pedido) */
+.pv-btn-checkout {
+    width: 100%;
+    background-color: var(--pv-primary);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.2s;
+}
+
+.pv-btn-checkout:hover {
+    background-color: var(--pv-dark);
+}
+
+/* ==================================================
+   src/index.css - Estilos para a tela de Notificações
+   ================================================== */
+
+#main-notificacao {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 18px;
+}
+
+#main-notificacao h2 {
+    color: var(--pv-dark);
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Container que divide a lista do detalhe (Split View) */
+.notificacao-wrapper {
+    display: flex;
+    gap: 20px;
+}
+
+/* Lista de Notificações */
+#lista-notificacoes {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1; /* Ocupa o máximo de espaço possível */
+    min-width: 300px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.notificacao-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.2s, box-shadow 0.2s;
+    font-size: 0.95em;
+    color: #444; /* Cor para notificação não lida (pode ser ajustada) */
+}
+
+.notificacao-item:hover {
+    background-color: #f9f9f9;
+}
+
+.notificacao-item:first-child {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.notificacao-item:last-child {
+    border-bottom: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Ícone/Avatar da Notificação */
+.icone-notificacao {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50%; /* Circular */
+    margin-right: 15px;
+    border: 1px solid #eee;
+    flex-shrink: 0; /* Não encolhe */
+}
+
+/* Estado de Notificação Selecionada/Ativa */
+.notificacao-selecionada {
+    background-color: #e6f7ff; /* Fundo azul claro para indicar seleção */
+    border-left: 4px solid var(--pv-primary);
+    padding-left: 11px; /* Compensa o border-left */
+    font-weight: bold; /* Destaca o texto */
+    color: var(--pv-dark);
+}
+
+/* Notificação Lida (A ser implementada com um estado no React, por exemplo) */
+/* .notificacao-lida {
+    color: #888;
+    font-weight: normal;
+} */
+
+
+/* Detalhe da Notificação (Onde o conteúdo completo é exibido) */
+.notificacao-detalhe {
+    flex: 2; /* Ocupa mais espaço que a lista */
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+}
+
+.detalhe-placeholder {
+    margin: auto;
+    color: #aaa;
+    font-style: italic;
+    text-align: center;
+}
+
+/* ---------------------\
+   Media Queries (Responsividade)
+   --------------------- */
+
+@media (max-width: 768px) {
+    .notificacao-wrapper {
+        flex-direction: column;
+    }
+    
+    /* Esconde o Detalhe em telas pequenas se não houver notificação selecionada */
+    .notificacao-detalhe {
+        display: none; 
+        /* Se você quer que o detalhe apareça como tela separada: 
+           A lógica de navegação precisaria ser ajustada no App.tsx. 
+           Por agora, vamos apenas focar na lista para mobile.
+        */
+    }
+}
