@@ -38,7 +38,7 @@ export default function MenuConta({ usuario, onNavigate, onLogout, onClose }: Pr
             className="pv-menu-btn" 
             onClick={() => handleNavigate('perfil')} // <-- CORREÇÃO AQUI
         >
-            <img src="assets/img/icones/perfil.png" alt="Perfil" /> Meu Perfil
+            <img src="/assets/img/icones/perfil.png" alt="Perfil" /> Meu Perfil
         </button>
         
         {/* Opção para o Chat (Mensagens) */}
@@ -46,7 +46,7 @@ export default function MenuConta({ usuario, onNavigate, onLogout, onClose }: Pr
             className="pv-menu-btn" 
             onClick={() => handleNavigate('chat')}
         >
-            <img src="assets/img/icones/chat.png" alt="Chat" /> Mensagens
+            <img src="/assets/img/icones/chat.png" alt="Chat" /> Mensagens
         </button>
 
         <div className="pv-menu-separador" />
@@ -56,7 +56,7 @@ export default function MenuConta({ usuario, onNavigate, onLogout, onClose }: Pr
             className="pv-menu-btn pv-menu-logout" 
             onClick={handleLogout}
         >
-            <img src="assets/img/icones/sair.png" alt="Sair" /> Sair da Conta
+            <img src="/assets/img/icones/sair.png" alt="Sair" /> Sair da Conta
         </button>
       </div>
     </div>

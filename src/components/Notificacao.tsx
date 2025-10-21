@@ -1,9 +1,9 @@
 import React from 'react'
 
 const items = [
-  { msg: 'Você recebeu uma nova mensagem no chat.', img: 'assets/img/icones/logo_pescaviva.png' },
-  { msg: 'Seu pedido foi enviado!', img: 'assets/img/icones/logo_pescaviva.png' },
-  { msg: 'Promoção: Peixes frescos com 10% de desconto hoje.', img: 'assets/img/icones/logo_pescaviva.png' }
+  { msg: 'Você recebeu uma nova mensagem no chat.', img: '/assets/img/icones/logo_pescaviva.png' },
+  { msg: 'Seu pedido foi enviado!', img: '/assets/img/icones/logo_pescaviva.png' },
+  { msg: 'Promoção: Peixes frescos com 10% de desconto hoje.', img: '/assets/img/icones/logo_pescaviva.png' }
 ]
 
 // Define a prop onVoltar

@@ -134,7 +134,7 @@ export default function App(){
       {/* Componente Toast */}
       {toastMessage && (
           <div className="pv-toast">
-              <img src="assets/img/icones/carrinho.png" alt="carrinho" style={{width:20, marginRight: 10}} />
+              <img src="/assets/img/icones/carrinho.png" alt="carrinho" style={{width:20, marginRight: 10}} />
               {toastMessage}
           </div>
       )}

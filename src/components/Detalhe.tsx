@@ -9,7 +9,7 @@ type Props = {
 
 export default function Detalhe({ produto, onVoltar, onAdicionarCarrinho }: Props){
   if(!produto) return null
-  const vendedor = produto.vendedor || { nome: 'Vendedor desconhecido', foto: 'assets/img/pescadores/semfoto.jpg' }
+  const vendedor = produto.vendedor || { nome: 'Vendedor desconhecido', foto: '/assets/img/pescadores/semfoto.jpg' }
   return (
     <main id="main-detalhe">
       <div className="produto-detalhe-container">

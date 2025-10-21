@@ -34,7 +34,7 @@ export default function Header({ onNavigate, usuario, onLogout, navigateToLogin,
         {/* PV-LEFT: Logo e Busca */}
         <div className="pv-left">
           <img 
-            src="assets/img/icones/logo_pescaviva.png" 
+            src="/assets/img/icones/logo_pescaviva.png" 
             alt="Pescaviva" 
             className="pv-logo" 
             onClick={() => onNavigate('lista')} 
@@ -46,7 +46,7 @@ export default function Header({ onNavigate, usuario, onLogout, navigateToLogin,
               aria-label="Pesquisar" 
             />
             <button className="pv-search-button" aria-label="Pesquisar" onClick={() => onNavigate('lista')}>
-              <img src="assets/img/icones/lupa.png" alt="buscar" />
+              <img src="/assets/img/icones/lupa.png" alt="buscar" />
             </button>
           </div>
         </div>
@@ -55,17 +55,17 @@ export default function Header({ onNavigate, usuario, onLogout, navigateToLogin,
         <nav className="pv-actions">
           {/* Botão Publicar */}
           <button className="pv-btn pv-btn-ghost" onClick={() => onNavigate('publicar')}>
-            <img src="assets/img/icones/publicar.png" alt="publicar" /> Publicar
+            <img src="/assets/img/icones/publicar.png" alt="publicar" /> Publicar
           </button>
           
           {/* Botão Notificação */}
           <button className="pv-btn" onClick={() => onNavigate('notificacao')}>
-            <img src="assets/img/icones/notificacao.png" alt="notificacao" />
+            <img src="/assets/img/icones/notificacao.png" alt="notificacao" />
           </button>
           
           {/* Botão Carrinho com Contador (Badge) */}
           <button className="pv-btn pv-carrinho-btn-wrapper" onClick={() => onNavigate('carrinho')}>
-            <img src="assets/img/icones/carrinho.png" alt="carrinho" />
+            <img src="/assets/img/icones/carrinho.png" alt="carrinho" />
             {/* O badge aparece se a contagem for maior que zero */}
             {contagemCarrinho > 0 && <span className="pv-carrinho-badge">{contagemCarrinho}</span>} 
           </button>
