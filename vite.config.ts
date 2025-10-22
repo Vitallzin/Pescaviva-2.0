@@ -1,5 +1,3 @@
-// vite.config.ts (Versão CORRIGIDA)
-
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
