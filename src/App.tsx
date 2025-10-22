@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import Banner from './components/Banner'
 import CardList from './components/CardList'
 import Publicar from './components/Publicar'

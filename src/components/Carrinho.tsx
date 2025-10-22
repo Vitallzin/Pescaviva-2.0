@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Produto } from '../data/produtos'
 
 // Reutiliza o tipo de item do carrinho definido no App.tsx ou redefine-o aqui
@@ -51,7 +50,7 @@ export default function Carrinho({ itens, onRemover, onAtualizarQuantidade, onVo
           <li className="item-carrinho" key={idx}>
             <img src={produto.imagem} alt={produto.titulo} />
             <span><strong>{produto.titulo}</strong> - {produto.preco}</span>
-            <input 
+            <input
               type="number" 
               min={1} 
               value={produto.quantidade} 

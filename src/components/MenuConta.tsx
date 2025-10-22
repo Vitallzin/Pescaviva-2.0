@@ -1,5 +1,3 @@
-// src/components/MenuConta.tsx
-import React from 'react'
 import type { ViewType, Usuario } from '../data/produtos'
 
 type Props = {

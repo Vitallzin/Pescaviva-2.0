@@ -1,4 +1,3 @@
-import React from 'react'
 import type { Produto } from '../data/produtos'
 
 type Props = {

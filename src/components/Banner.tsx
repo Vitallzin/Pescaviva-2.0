@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { banner1, banner2 } from '../assets'
 
 export default function Banner(){
   const [idx, setIdx] = useState(0)
-  const imgs = ['/assets/img/banner/banner1.png','/assets/img/banner/banner2.jpg']
+  const imgs = [banner1, banner2]
 
   useEffect(()=>{
     const id = setInterval(()=> setIdx(i => (i+1)%imgs.length), 6500)
