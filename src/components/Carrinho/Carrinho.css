@@ -1,0 +1,142 @@
+/* ---------------------
+   Componente Carrinho.tsx
+   --------------------- */
+
+#main-carrinho {
+    max-width: 900px;
+    margin: 24px auto; /* Centraliza o carrinho na tela */
+}
+
+#lista-carrinho {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.item-carrinho {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-bottom: 1px solid #f0f0f0; /* Linha divisória suave */
+    transition: background-color 0.2s;
+}
+
+.item-carrinho:last-child {
+    border-bottom: none;
+}
+
+.item-carrinho img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-carrinho span {
+    flex-grow: 1; /* Permite que o texto ocupe o espaço */
+    font-size: 1em;
+    color: var(--pv-dark, #0b6b48);
+}
+
+/* Estilização para o Input de Quantidade (Acessibilidade e Usabilidade) */
+.input-quantidade-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 15px;
+    width: 80px;
+}
+
+.input-quantidade-wrapper label {
+    font-size: 0.75em;
+    color: #666;
+    margin-bottom: 4px;
+    text-align: center;
+}
+
+.input-quantidade-wrapper input {
+    width: 100%;
+    padding: 8px;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    /* Remove as setas padrão (spin buttons) para controle de quantidade mais limpo */
+    -moz-appearance: textfield; /* Firefox */
+}
+.input-quantidade-wrapper input::-webkit-outer-spin-button,
+.input-quantidade-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Botão Remover */
+.btn-remover {
+    background: #ff5050; /* Cor de alerta */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.btn-remover:hover {
+    background: #cc0000;
+}
+
+/* Resumo do Carrinho */
+.resumo-carrinho {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.resumo-carrinho h3 {
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #eee;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 1.1em;
+}
+
+.total-linha {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--pv-primary, #138f6b);
+    border-top: 2px solid var(--pv-primary);
+    margin-top: 10px;
+    padding-top: 10px;
+}
+
+/* Botão de Checkout (Ação Primária) */
+.pv-btn-checkout {
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: var(--pv-primary, #138f6b);
+    color: white;
+    border: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.pv-btn-checkout:hover {
+    background-color: var(--pv-dark, #0b6b48);
+}

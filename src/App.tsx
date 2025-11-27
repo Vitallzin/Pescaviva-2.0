@@ -9,6 +9,8 @@ import Notificacao from './components/Notificacao'
 import Header from './components/Header'
 import Login from './components/Login'
 import Perfil from './components/Perfil'
+// NOVO: Importa o componente Footer
+import Footer from './components/Footer'
 // Importa TODOS os tipos e dados de mock do arquivo centralizado 'produtos.ts'
 import type { Produto, Usuario, ViewType, LoginMode } from './data/produtos' 
 import { produtosDestaque as pd, peixesPerto as pp, MOCK_USER } from './data/produtos'
@@ -28,207 +30,122 @@ export default function App(){
   // Estado para controlar o modo inicial da tela de login/cadastro
   const [loginMode, setLoginMode] = useState<LoginMode>('login') 
 
-  // ESTADO E FUNÇÕES PARA O TOAST
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  function showToast(message: string) {
-      setToastMessage(message);
-      // Remove o toast após 3 segundos
-      setTimeout(() => {
-          setToastMessage(null);
-      }, 3000);
-  }
-
-  // Efeito para persistência (Carrega o estado do usuário no início da aplicação)
+  // Efeito para rolar para o topo ao mudar a view
   useEffect(() => {
-    try {
-      const storedUser = localStorage.getItem('pv_usuario')
-      if (storedUser) {
-        setUsuarioLogado(JSON.parse(storedUser))
-      }
-    } catch (error) {
-      console.error("Erro ao carregar usuário do localStorage:", error);
-      localStorage.removeItem('pv_usuario');
+    window.scrollTo(0, 0)
+  }, [view])
+
+
+  const onLogin = (email: string) => {
+    // Lógica simplificada de login de mock
+    if (email === MOCK_USER.email) {
+      setUsuarioLogado(MOCK_USER)
+      setView('lista')
+      return true
     }
-  }, [])
-
-  // Limita o número de produtos para melhor performance do carrossel
-  const produtosDestaque = useMemo(()=> pd.slice(0,10), [])
-  const peixesPerto = useMemo(()=> pp.slice(0,10), [])
-
-  function verDetalhe(produto:Produto){
-    setProdutoSelecionado(produto)
-    setView('detalhe')
-    window.scrollTo(0,0)
-  }
-
-  function adicionarAoCarrinho(produto:Produto){
-    setCarrinho(prev => {
-      const idx = prev.findIndex((p:CarrinhoItem)=> p.titulo===produto.titulo && p.preco===produto.preco)
-      if(idx > -1){
-        // SE JÁ EXISTE: Incrementa por +1
-        const novoCarrinho = [...prev]
-        novoCarrinho[idx].quantidade += 1
-        return novoCarrinho
-      }
-      // SE NÃO EXISTE: Adiciona com quantidade 1 (Garantido!)
-      return [...prev, { ...produto, quantidade: 1 }] 
-    })
-    
-    // Mostra o Toast
-    showToast(`'${produto.titulo}' adicionado ao carrinho!`) 
-  }
-
-  function removerDoCarrinho(index: number){
-    setCarrinho(prev => prev.filter((_, i) => i !== index))
-  }
-
-  function atualizarQuantidade(index: number, q: number){
-    if(q < 1) return
-    setCarrinho(prev => prev.map((item, i) => i === index ? { ...item, quantidade: q } : item))
+    alert('Usuário não encontrado. Tente com o e-mail: ' + MOCK_USER.email)
+    return false
   }
   
-  // Função de navegação genérica
-  function onNavigate(newView: ViewType) {
-    setView(newView)
-    window.scrollTo(0,0)
+  const onLogout = () => {
+    setUsuarioLogado(null)
+    setView('lista')
+  }
+  
+  const onAdicionarCarrinho = (produto: Produto, quantidade: number = 1) => {
+      // 1. Verifica se o produto já está no carrinho
+      const index = carrinho.findIndex(item => item.id === produto.id)
+
+      if (index !== -1) {
+          // 2. Se estiver, atualiza a quantidade
+          const novoCarrinho = [...carrinho]
+          novoCarrinho[index].quantidade += quantidade
+          setCarrinho(novoCarrinho)
+      } else {
+          // 3. Se não estiver, adiciona o novo item
+          setCarrinho([...carrinho, { ...produto, quantidade }])
+      }
+      alert(`${quantidade}x ${produto.titulo} adicionado(s) ao carrinho!`)
+  }
+  
+  const onRemoverCarrinho = (index: number) => {
+    setCarrinho(carrinho.filter((_, i) => i !== index))
+  }
+  
+  const onAtualizarQuantidade = (index: number, novaQuantidade: number) => {
+    const q = Math.max(1, novaQuantidade) // Garante que a quantidade seja no mínimo 1
+    const novoCarrinho = [...carrinho]
+    novoCarrinho[index].quantidade = q
+    setCarrinho(novoCarrinho)
   }
 
-  // Navegação específica para Entrar
-  function navigateToLogin() {
+  // Mapeamento dos componentes de View
+  const CurrentView = useMemo(() => {
+    switch(view){
+      case 'publicar':
+        return <Publicar onVoltar={() => setView('lista')} produtosDestaque={pd} peixesPerto={pp} />
+      case 'detalhe':
+        // A prop onAdicionarCarrinho agora espera a quantidade (ajustado para o Detalhe.tsx anterior)
+        return <Detalhe produto={produtoSelecionado} onVoltar={() => setView('lista')} onAdicionarCarrinho={onAdicionarCarrinho} />
+      case 'carrinho':
+        return <Carrinho itens={carrinho} onRemover={onRemoverCarrinho} onAtualizarQuantidade={onAtualizarQuantidade} onVoltar={() => setView('lista')} />
+      case 'chat':
+        return <Chat onVoltar={() => setView('lista')} />
+      case 'notificacao':
+        return <Notificacao onVoltar={() => setView('lista')} />
+      case 'login':
+      case 'cadastro':
+        return <Login onVoltar={() => setView('lista')} onLogin={onLogin} onNavigate={setView} initialMode={loginMode} />
+      case 'perfil':
+        if(!usuarioLogado) return <p>Acesso negado.</p>
+        return <Perfil usuario={usuarioLogado} onVoltar={() => setView('lista')} />
+      case 'lista':
+      default:
+        // View 'lista' (Home)
+        return (
+          <>
+            <Banner />
+            <h2>Produtos em Destaque</h2>
+            <CardList produtos={pd} onVerDetalhe={(p) => { setProdutoSelecionado(p); setView('detalhe') }} />
+            <h2>Peixes Perto de Você</h2>
+            <CardList produtos={pp} onVerDetalhe={(p) => { setProdutoSelecionado(p); setView('detalhe') }} />
+          </>
+        )
+    }
+  }, [view, produtoSelecionado, carrinho, usuarioLogado, loginMode])
+  
+  // Função para navegar para o login ou cadastro
+  const navigateToLogin = () => {
     setLoginMode('login')
     setView('login')
-    window.scrollTo(0,0)
   }
-
-  // Navegação específica para Cadastrar
-  function navigateToCadastro() {
+  const navigateToCadastro = () => {
     setLoginMode('cadastro')
-    setView('login') // A view é 'login', mas o modo é 'cadastro'
-    window.scrollTo(0,0)
+    setView('cadastro')
   }
 
-  // Lógica de Login (simulação)
-  function realizarLogin(email: string) {
-    if (email) {
-      const userToLogin = MOCK_USER; 
-      
-      setUsuarioLogado(userToLogin);
-      localStorage.setItem('pv_usuario', JSON.stringify(userToLogin)); 
-      setView('lista'); 
-      return true;
-    }
-    return false;
-  }
-
-  // Lógica de Logout
-  function realizarLogout() {
-    setUsuarioLogado(null);
-    localStorage.removeItem('pv_usuario');
-    setView('lista'); 
-  }
+  // Conta o número total de itens no carrinho
+  const contagemCarrinho = useMemo(() => carrinho.reduce((acc, item) => acc + item.quantidade, 0), [carrinho])
 
   return (
-    <div id="app-container">
-      
-      {/* Componente Toast */}
-      {toastMessage && (
-          <div className="pv-toast">
-              <img src="/assets/img/icones/carrinho.png" alt="carrinho" style={{width:20, marginRight: 10}} />
-              {toastMessage}
-          </div>
-      )}
-
+    <>
+      {/* Header sempre visível */}
       <Header 
-        onNavigate={onNavigate} 
-        usuario={usuarioLogado} 
-        onLogout={realizarLogout}
-        navigateToLogin={navigateToLogin} 
-        navigateToCadastro={navigateToCadastro} 
-        contagemCarrinho={carrinho.length} 
+        onNavigate={setView}
+        usuario={usuarioLogado}
+        onLogout={onLogout}
+        navigateToLogin={navigateToLogin}
+        navigateToCadastro={navigateToCadastro}
+        contagemCarrinho={contagemCarrinho}
       />
-
-      {view === 'lista' && (
-        <main className="content-lista">
-          <Banner />
-          <div className="container-main">
-            <h2>Peixes em Destaque</h2>
-            <CardList produtos={produtosDestaque} onVerDetalhe={verDetalhe} />
-
-            <h2 style={{marginTop: 48}}>Peixes Perto de Você</h2>
-            <CardList produtos={peixesPerto} onVerDetalhe={verDetalhe} />
-          </div>
-        </main>
-      )}
-
-      {view === 'detalhe' && (
-        <Detalhe
-          produto={produtoSelecionado}
-          onVoltar={() => setView('lista')}
-          onAdicionarCarrinho={adicionarAoCarrinho} // Chamada para adicionar ao carrinho
-        />
-      )}
-
-      {view === 'carrinho' && (
-        <Carrinho
-          itens={carrinho}
-          onRemover={removerDoCarrinho}
-          onAtualizarQuantidade={atualizarQuantidade}
-          onVoltar={() => setView('lista')}
-        />
-      )}
-
-      {view === 'publicar' && (
-        <Publicar 
-          onVoltar={() => setView('lista')} 
-          produtosDestaque={produtosDestaque}
-          peixesPerto={peixesPerto}
-        />
-      )}
       
-      {view === 'notificacao' && <Notificacao onVoltar={() => setView('lista')} />}
+      {/* Conteúdo Principal (Centralizado) */}
+      <main>
+        {CurrentView}
+      </main>
       
-      {view === 'chat' && <Chat onVoltar={() => setView('lista')} />}
-      
-      {view === 'login' && (
-        <Login 
-          initialMode={loginMode} 
-          onVoltar={() => setView('lista')}
-          onLogin={realizarLogin} 
-          onNavigate={onNavigate}
-        />
-      )}
-
-      {/* Renderização da tela de Perfil */}
-      {view === 'perfil' && usuarioLogado && (
-        <Perfil
-            usuario={usuarioLogado}
-            onVoltar={() => setView('lista')}
-        />
-      )}
-
-      <footer className="pv-footer">
-        <div style={{ maxWidth: 1200, margin: '0 auto', padding: '24px 0' }}>
-          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'space-between' }}>
-            <div style={{ flex: 1, minWidth: 220 }}>
-              <h4 style={{ color: '#fff', marginBottom: 10 }}>Redes sociais</h4>
-              <a href="#" target="_blank" rel="noreferrer" style={{color:'#ccc', display:'block', marginBottom: 5}}>Facebook</a>
-              <a href="https://www.instagram.com/app.pescaviva/" target="_blank" rel="noreferrer" style={{color:'#ccc', display:'block', marginBottom: 5}}>Instagram</a>
-            </div>
-            <div style={{ flex: 1, minWidth: 220 }}>
-              <h4 style={{ color: '#fff', marginBottom: 10 }}>Contato</h4>
-              <div style={{color:'#ccc', marginBottom: 5}}><a href="#" style={{color:'inherit'}}>contato@pescaviva.com.br</a></div>
-              <div style={{color:'#ccc', marginBottom: 5}}><a href="#" style={{color:'inherit'}}>(00) 9 9999-9999</a></div>
-              <div style={{color:'#ccc', marginBottom: 5}}><a href="#" style={{color:'inherit'}}>Rua dos Navegantes, 145 – Bairro Costa Azul</a></div>
-            </div>
-            <div style={{ flex: 1, minWidth: 220 }}>
-              <h4 style={{ color: '#fff', marginBottom: 10 }}>Sobre</h4>
-              <p style={{ color: '#ccc', lineHeight: 1.4 }}>A Pescaviva conecta pescadores diretamente a você, garantindo peixes mais frescos e preços justos. Nossa plataforma facilita a compra e venda de pescados de forma sustentável e transparente.</p>
-            </div>
-          </div>
-        </div>
-        <p style={{paddingTop: 10, borderTop: '1px solid #042a54', color: '#ccc'}}>&copy; 2025 Pescaviva. Todos os direitos reservados.</p>
-      </footer>
-    </div>
+      {/* NOVO: Footer como um componente limpo */}
+      <Footer />
+    </>
   )
 }

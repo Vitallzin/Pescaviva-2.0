@@ -1,0 +1,87 @@
+/* ---------------------
+   Componente Perfil.tsx
+   --------------------- */
+
+#main-perfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 18px;
+}
+
+.perfil-container-main {
+    max-width: 800px; /* Mantém a largura consistente com o original */
+    width: 100%;
+}
+
+.perfil-container-main h2 {
+    color: var(--pv-contrast, #05386b);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* O botão Voltar já usa a classe global 'btn-voltar-detalhe', 
+   mas aplicamos um estilo de margem específico aqui */
+.perfil-container-main .btn-voltar-detalhe {
+    margin-bottom: 20px;
+    /* Garante que o botão seja exibido como bloco na largura máxima */
+    display: block; 
+}
+
+
+/* ---------------------
+   Card de Informações do Perfil
+   --------------------- */
+.perfil-card {
+    border: 1px solid #ddd;
+    padding: 30px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 30px; /* Aumenta o espaçamento para clareza visual */
+    align-items: center;
+}
+
+.perfil-foto {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--pv-primary, #138f6b); /* Borda primária destacada */
+    flex-shrink: 0; /* Impede que a foto encolha */
+}
+
+.perfil-info-box h3 {
+    margin-top: 0;
+    color: var(--pv-dark, #0b6b48);
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.perfil-info-box p {
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+.perfil-observacao {
+    margin-top: 15px;
+    color: #666;
+    font-size: 0.9em;
+    font-style: italic; /* Destaca a observação */
+}
+
+/* ---------------------
+   Responsividade
+   --------------------- */
+@media (max-width: 600px) {
+    .perfil-card {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    .perfil-info-box h3 {
+        text-align: center;
+    }
+}

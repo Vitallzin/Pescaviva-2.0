@@ -1,0 +1,146 @@
+/* ---------------------
+   Componente CardList.tsx
+   --------------------- */
+
+.card-list-wrapper {
+    position: relative;
+    padding: 0;
+    margin-bottom: 30px; /* Adiciona espaço abaixo da lista */
+}
+
+.card-container {
+    display: flex;
+    overflow-x: scroll; /* Mantém a rolagem horizontal */
+    scroll-behavior: smooth;
+    gap: 15px;
+    padding: 10px 0; /* Padding vertical para deslizar */
+    /* Melhoria de Acessibilidade: Oculta a barra de rolagem padrão para uma interface mais limpa,
+       mas a funcionalidade continua com as setas laterais. */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+.card-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.card-item {
+    /* Tornar o card clicável e acessível por teclado */
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Impede o encolhimento */
+    width: 250px; /* Largura fixa para previsibilidade */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-decoration: none; /* Remove sublinhado se o card for um link */
+    
+    /* Acessibilidade: Indica que o item pode ser clicado */
+    outline: 2px solid transparent; 
+    outline-offset: 2px;
+}
+
+.card-item:hover,
+.card-item:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    outline-color: var(--pv-primary, #138f6b); /* Foco visual forte */
+}
+
+.card-imagem {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+.card-info {
+    padding: 10px;
+    flex-grow: 1; /* Garante que o conteúdo ocupe o espaço */
+}
+
+.titulo {
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--pv-dark, #0b6b48);
+    margin: 0 0 5px 0;
+}
+
+.descricao {
+    font-size: 0.9em;
+    color: #666;
+    height: 36px; /* Altura fixa para duas linhas, mantendo o layout uniforme */
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8em;
+    color: #999;
+    margin-top: 5px;
+}
+
+.botao_comprar {
+    /* Estilo de Botão de Ação Primária */
+    width: 100%;
+    padding: 10px;
+    background-color: var(--pv-primary, #138f6b);
+    color: white;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0 0 8px 8px;
+    transition: background-color 0.2s;
+    outline: none; /* O foco do teclado será no card inteiro */
+}
+
+.botao_comprar:hover {
+    background-color: var(--pv-dark, #0b6b48);
+}
+
+.preco-no-botao {
+    font-size: 1.1em;
+    margin-left: 5px;
+}
+
+/* Estilos para os controles de navegação lateral (setas) */
+.prev-produto, .proximo-produto {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 36px;
+    text-align: center;
+    font-size: 20px;
+    color: var(--pv-dark);
+    cursor: pointer;
+    opacity: 0; /* Começa invisível */
+    transition: opacity 0.3s, background 0.3s;
+}
+
+.prev-produto:hover, .proximo-produto:hover {
+    background: white;
+}
+
+.prev-produto.visible, .proximo-produto.visible {
+    opacity: 1; /* Visível quando necessário */
+}
+
+.prev-produto {
+    left: 0;
+}
+
+.proximo-produto {
+    right: 0;
+}

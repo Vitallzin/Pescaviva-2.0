@@ -1,6 +1,7 @@
 // src/components/Login.tsx
 import React, { useState, useEffect } from 'react'
-import type { ViewType } from '../data/produtos' // Importado do App.tsx
+import type { ViewType } from '../../data/produtos' // Importado do App.tsx
+import './Login.css'
 
 type LoginMode = 'login' | 'cadastro' // Importado do App.tsx
 

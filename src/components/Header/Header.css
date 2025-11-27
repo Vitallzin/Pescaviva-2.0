@@ -1,0 +1,157 @@
+/* ---------------------
+   Componente Header.tsx
+   --------------------- */
+
+/* O posicionamento fixed está no index.css, aqui definimos o conteúdo interno */
+.pv-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    height: 100%; 
+    padding: 0 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* ---------------------
+   PV-LEFT: Logo e Busca
+   --------------------- */
+.pv-left {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex-grow: 1;
+}
+
+/* ✅ O Logo: Tamanho e proporção */
+.pv-logo {
+    height: 40px; 
+    width: auto; /* Garante que não estique a imagem */
+    display: block;
+    cursor: pointer;
+}
+
+.pv-busca-wrapper {
+    position: relative;
+    max-width: 400px;
+    flex-grow: 1;
+}
+
+.pv-busca-wrapper input {
+    width: 100%;
+    padding: 10px 15px 10px 40px; 
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* ✅ Ícone de Lupa na Busca: Posicionamento absoluto */
+.pv-busca-wrapper img {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    opacity: 0.6;
+}
+
+/* ---------------------
+   PV-RIGHT: Navegação e Perfil
+   --------------------- */
+.pv-right {
+    display: flex;
+    align-items: center;
+    gap: 25px; 
+    flex-shrink: 0;
+}
+
+/* ✅ Links de Ícones (Publicar, Notificação, Carrinho) */
+.pv-nav-icon,
+.pv-icon-link {
+    /* É um link que contém o ícone */
+    display: flex;
+    position: relative;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    /* Remove o padding padrão do link para usar o tamanho do ícone */
+    padding: 0; 
+}
+.pv-nav-icon:hover,
+.pv-icon-link:hover {
+    opacity: 0.8;
+}
+
+/* ✅ As Imagens DENTRO dos Links de Ícones: Tamanho fixo */
+.pv-icon-link img {
+    width: 24px;
+    height: 24px;
+}
+
+/* Badge de Contagem (Carrinho) */
+.pv-badge {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: #ff3838; 
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 0.75em;
+    font-weight: bold;
+    line-height: 1;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Wrapper do Perfil Logado */
+.pv-perfil-logado-wrapper {
+    position: relative;
+}
+
+/* ✅ Foto de Perfil */
+.pv-foto-perfil {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+}
+
+.pv-foto-perfil.ativo,
+.pv-foto-perfil:hover {
+    border-color: var(--pv-primary, #138f6b);
+}
+
+/* Botões de Autenticação (Não Logado) */
+.pv-auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* ---------------------
+   Media Queries (Responsividade)
+   --------------------- */
+@media (max-width: 768px) {
+    .pv-left {
+        gap: 15px;
+    }
+    .pv-left .pv-busca-wrapper {
+        display: none; 
+    }
+    .pv-right {
+        gap: 15px;
+    }
+    .pv-logo {
+        height: 35px;
+    }
+    .pv-foto-perfil {
+        width: 40px;
+        height: 40px;
+    }
+}

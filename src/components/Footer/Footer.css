@@ -1,0 +1,92 @@
+/* ---------------------
+   Componente Footer.tsx
+   --------------------- */
+
+#pv-footer {
+    background-color: var(--pv-contrast, #05386b); /* Cor forte para contraste */
+    color: white;
+    padding: 40px 18px 0; /* Padding superior generoso */
+    margin-top: 40px; /* Garante separação do conteúdo principal */
+    flex-shrink: 0; /* Impede que o rodapé encolha */
+}
+
+.pv-footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap; /* Permite que as colunas quebrem em telas menores */
+    justify-content: space-between;
+    gap: 30px; /* Espaço entre as colunas */
+    padding-bottom: 30px;
+}
+
+.pv-footer-col {
+    flex: 1; /* Distribuição uniforme das colunas */
+    min-width: 220px; /* Garante que as colunas não fiquem muito estreitas */
+}
+
+.pv-footer-col h4 {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Linha sutil para separar o título */
+    padding-bottom: 5px;
+}
+
+.pv-footer-link {
+    color: #ccc;
+    text-decoration: none;
+    display: block; /* Cada link em uma nova linha */
+    margin-bottom: 8px;
+    transition: color 0.2s;
+}
+
+.pv-footer-link:hover,
+.pv-footer-link:focus {
+    color: var(--pv-primary, #138f6b); /* Bom contraste de cor ao interagir */
+    text-decoration: underline;
+}
+
+.pv-footer-info {
+    color: #ccc;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+.pv-footer-link-info {
+    color: inherit; /* Herda a cor cinza */
+    text-decoration: none;
+}
+.pv-footer-link-info:hover {
+    color: var(--pv-primary, #138f6b);
+    text-decoration: underline;
+}
+
+.pv-footer-sobre p {
+    color: #ccc;
+    line-height: 1.6;
+    font-size: 0.95em;
+}
+
+.pv-footer-copy {
+    text-align: center;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.8em;
+    color: #aaa;
+}
+.pv-footer-copy p {
+    margin: 0;
+}
+
+/* ---------------------
+   Responsividade do Rodapé
+   --------------------- */
+@media (max-width: 768px) {
+    .pv-footer-inner {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .pv-footer-col {
+        min-width: 100%; /* Ocupa a largura total em telas pequenas */
+    }
+}

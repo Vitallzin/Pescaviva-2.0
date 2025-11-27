@@ -1,0 +1,184 @@
+/* ---------------------
+   Componente Publicar.tsx
+   --------------------- */
+
+#main-publicar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 18px;
+}
+
+.publicar-container-main {
+    max-width: 700px; /* Largura ideal para um formulário complexo */
+    width: 100%;
+}
+
+.publicar-container-main h2 {
+    color: var(--pv-contrast, #05386b);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* O botão Voltar já usa a classe global 'btn-voltar-detalhe' */
+.publicar-container-main .btn-voltar-detalhe {
+    margin-bottom: 20px;
+    display: block; 
+}
+
+
+/* ---------------------
+   Formulário Principal
+   --------------------- */
+.form-publicar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Espaçamento generoso entre grupos de campo */
+    padding: 30px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ---------------------
+   Fieldset (Agrupamento de Campos)
+   --------------------- */
+.form-publicar fieldset {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 15px; /* Espaço entre fieldsets */
+}
+
+.form-publicar legend {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--pv-dark, #0b6b48);
+    padding: 0 10px;
+}
+
+/* Estilo Base para Inputs, Select e Textarea */
+.form-publicar label {
+    display: block;
+    font-weight: 500;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.form-publicar input:not([type="range"]),
+.form-publicar select,
+.form-publicar textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+}
+
+.form-publicar input:not([type="range"]):focus,
+.form-publicar select:focus,
+.form-publicar textarea:focus {
+    border-color: var(--pv-primary, #138f6b);
+    box-shadow: 0 0 0 3px rgba(19, 143, 107, 0.2);
+}
+
+.form-publicar textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ---------------------
+   Sugestão de Produto (Datalist)
+   --------------------- */
+.input-with-suggestion {
+    position: relative;
+    /* Ajusta o estilo para o input normal */
+}
+
+/* ---------------------
+   Controles de Preço (Range e Display)
+   --------------------- */
+.campo-preco-final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.campo-preco-final label {
+    margin-top: 10px;
+}
+
+.display-preco {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--pv-primary, #138f6b);
+    padding: 10px;
+    border: 2px dashed #eee;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.campo-preco-final input[type="number"] {
+    width: 150px;
+    text-align: center;
+}
+
+.campo-preco-final input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+/* ---------------------
+   Upload de Arquivo (Imagem)
+   --------------------- */
+.file-upload-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Estilização básica para o input file */
+.file-upload-wrapper input[type="file"] {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    background-color: #f7f7f7;
+    cursor: pointer;
+}
+
+.file-upload-wrapper input[type="file"]:hover {
+    background-color: #eee;
+}
+
+/* ---------------------
+   Botão de Ação
+   --------------------- */
+.pv-btn-publicar {
+    width: 100%;
+    background: var(--pv-primary, #138f6b);
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.2em;
+    font-weight: 700;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: background 0.2s;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+.pv-btn-publicar:hover {
+    background: var(--pv-dark, #0b6b48);
+}
+.pv-btn-publicar:focus {
+    outline-color: var(--pv-contrast, #05386b);
+}

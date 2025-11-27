@@ -1,0 +1,109 @@
+/* ---------------------
+   Componente MenuConta.tsx
+   --------------------- */
+
+.pv-menu-conta-dropdown {
+    /* Posicionamento relativo ao Header.tsx (pv-perfil-logado-wrapper) */
+    position: absolute;
+    top: 100%; /* Abaixo do ícone de perfil */
+    right: 0;
+    width: 250px; /* Largura padrão */
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000; /* Garante que fique acima de tudo */
+    padding: 10px 0;
+    margin-top: 10px;
+}
+
+/* ---------------------
+   Cabeçalho do Menu (Informações do Usuário)
+   --------------------- */
+.pv-menu-conta-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px 15px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+}
+
+.pv-foto-perfil-menu {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border: 2px solid var(--pv-primary, #138f6b);
+}
+
+.pv-menu-conta-header h4 {
+    margin: 0 0 4px 0;
+    color: var(--pv-dark, #0b6b48);
+}
+
+.pv-menu-conta-header p {
+    margin: 0;
+    font-size: 0.85em;
+    color: #666;
+}
+
+/* ---------------------
+   Opções do Menu
+   --------------------- */
+.pv-menu-conta-opcoes {
+    display: flex;
+    flex-direction: column;
+}
+
+.pv-menu-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-size: 1em;
+    color: #333;
+    transition: background-color 0.2s, color 0.2s;
+    outline: 2px solid transparent; /* Essencial para o foco do teclado */
+    outline-offset: -2px;
+}
+
+.pv-menu-btn:hover {
+    background-color: #f7f7f7;
+    color: var(--pv-dark, #0b6b48);
+}
+
+.pv-menu-btn:focus {
+    background-color: #e8e8e8;
+    outline-color: var(--pv-primary, #138f6b);
+}
+
+.pv-menu-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.pv-menu-separador {
+    height: 1px;
+    background-color: #eee;
+    margin: 8px 0;
+}
+
+/* Estilo específico para o botão de Sair */
+.pv-menu-btn.logout-btn {
+    color: #d32f2f; /* Cor de alerta */
+    font-weight: 600;
+}
+.pv-menu-btn.logout-btn:hover {
+    background-color: #ffebee; /* Fundo mais claro ao passar o mouse */
+    color: #c62828;
+}
+.pv-menu-btn.logout-btn:focus {
+    outline-color: #d32f2f;
+}

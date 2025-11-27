@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import type { Usuario, ViewType } from '../data/produtos' 
-import MenuConta from './MenuConta'
-import { logo_pescaviva, lupa, publicar, notificacao, carrinho } from '../assets' 
+import type { Usuario, ViewType } from '../../data/produtos' 
+import MenuConta from '../MenuConta'
+import { logo_pescaviva, lupa, publicar, notificacao, carrinho } from '../../assets' 
+import './Header.css'
 
 type Props = {
   onNavigate: (view: ViewType) => void

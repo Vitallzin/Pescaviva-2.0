@@ -1,0 +1,66 @@
+/* ---------------------
+   Componente Banner.tsx
+   --------------------- */
+
+.banner {
+    position: relative; 
+    width: 100%;
+    overflow: hidden; 
+    /* Garante que o container do banner tenha a altura necessária
+       Baseado no design, você pode querer definir uma altura fixa ou min-height. */
+    min-height: 250px; 
+}
+
+.banner img {
+    /* Garante que a imagem ocupe todo o espaço do container */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Estilo base para todos os botões de controle do banner */
+.pv-banner-control {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5); 
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s;
+    /* Para melhorar a acessibilidade por teclado: */
+    outline: 2px solid transparent; 
+    outline-offset: 2px;
+}
+
+.pv-banner-control:hover,
+.pv-banner-control:focus {
+    background: rgba(0, 0, 0, 0.8);
+    outline-color: var(--pv-primary, #138f6b); /* Usa sua cor primária para foco */
+}
+
+/* Botões de navegação Lateral (< e >) */
+.pv-banner-prev,
+.pv-banner-next {
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px 15px;
+    font-size: 20px;
+    border-radius: 4px;
+}
+
+.pv-banner-prev {
+    left: 10px;
+}
+
+.pv-banner-next {
+    right: 10px;
+}
+
+/* Botão de Pausa/Play (inferior direito) */
+.pv-banner-pause {
+    bottom: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+}

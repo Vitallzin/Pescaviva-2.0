@@ -1,0 +1,163 @@
+/* ---------------------
+   Componente Chat.tsx
+   --------------------- */
+
+#main-chat {
+    max-width: 1000px;
+    margin: 24px auto;
+    padding: 0 18px;
+}
+
+.chat-container {
+    display: flex;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 600px; /* Garante que a área de chat seja grande */
+    overflow: hidden;
+}
+
+/* ---------------------
+   Lista de Contatos
+   --------------------- */
+.contatos-lista {
+    flex-shrink: 0;
+    width: 280px;
+    border-right: 1px solid #eee;
+    background-color: #f7f7f7;
+    padding: 0;
+}
+
+.contatos-lista ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.contato {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    outline: 2px solid transparent; /* Essencial para o foco do teclado */
+    outline-offset: -2px;
+}
+
+.contato:hover,
+.contato:focus { /* Acessibilidade: Indica o item focado/selecionado no teclado */
+    background-color: #e8e8e8;
+    outline-color: var(--pv-primary, #138f6b);
+}
+
+.contato.ativo {
+    background-color: var(--pv-primary, #138f6b);
+    color: white;
+}
+
+.contato.ativo:hover {
+    background-color: var(--pv-dark, #0b6b48);
+}
+
+.contato img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+/* ---------------------
+   Área de Chat
+   --------------------- */
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-mensagens {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Espaçamento claro entre as mensagens */
+    background: #fdfdfd;
+}
+
+/* Estilo Base da Mensagem */
+.mensagem {
+    max-width: 80%;
+    clear: both; 
+    padding: 8px 12px;
+    border-radius: 18px;
+    line-height: 1.4;
+}
+
+/* Mensagens do Usuário Atual (Direita) */
+.mensagem.usuario {
+    align-self: flex-end;
+    background-color: var(--pv-primary, #138f6b);
+    color: white;
+    border-bottom-right-radius: 4px; 
+}
+
+/* Mensagens do Outro Usuário (Esquerda) */
+.mensagem.vendedor,
+.mensagem.cliente {
+    align-self: flex-start;
+    background-color: #eee;
+    color: #333;
+    border: 1px solid #ddd;
+    border-bottom-left-radius: 4px;
+}
+
+/* ---------------------
+   Formulário de Envio
+   --------------------- */
+.chat-form {
+    display: flex;
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+    flex-shrink: 0;
+}
+
+#chat-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+#chat-input:focus { /* Foco claro no campo de entrada */
+    border-color: var(--pv-primary, #138f6b);
+    box-shadow: 0 0 0 2px rgba(19, 143, 107, 0.3);
+}
+
+.btn-enviar-chat {
+    background-color: var(--pv-primary, #138f6b);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 50%; /* Botão redondo */
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    line-height: 1;
+    transition: background-color 0.2s;
+    outline: 2px solid transparent; /* Acessibilidade: Foco */
+    outline-offset: 2px;
+}
+
+.btn-enviar-chat:hover,
+.btn-enviar-chat:focus {
+    background-color: var(--pv-dark, #0b6b48);
+    outline-color: var(--pv-primary);
+}
