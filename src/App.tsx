@@ -128,7 +128,7 @@ export default function App() {
           <>
             <Banner />
 
-            <h2>Produtos em Destaque</h2>
+            
             <CardList
               produtos={pd}
               onVerDetalhe={(p) => {
@@ -137,7 +137,7 @@ export default function App() {
               }}
             />
 
-            <h2>Peixes Perto de Você</h2>
+            
             <CardList
               produtos={pp}
               onVerDetalhe={(p) => {

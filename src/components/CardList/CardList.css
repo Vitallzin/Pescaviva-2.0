@@ -5,6 +5,7 @@
 .card-list-wrapper {
     position: relative;
     padding: 0;
+    margin-top: 40px;
     margin-bottom: 30px; /* Adiciona espaço abaixo da lista */
 }
 
